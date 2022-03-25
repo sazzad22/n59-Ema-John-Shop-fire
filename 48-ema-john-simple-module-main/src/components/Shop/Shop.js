@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { addToDb } from '../../utilities/fakedb';
 import Product from '../Product/Product';
 import './Shop.css';
 
@@ -17,6 +18,7 @@ const Shop = () => {
         // do not do this: cart.push(product);
         const newCart = [...cart, product];
         setCart(newCart);
+        
     }
 
     return (
