@@ -3,6 +3,7 @@ import { faCoffee,faBagShopping,faShoppingBag,faShoppingBasket,faShoppingCart } 
 import React from 'react';
 import "./Product.css"
 
+//This element is The individual row of products on the main left side
 const Product = (props) => {
     // console.log(props);
 

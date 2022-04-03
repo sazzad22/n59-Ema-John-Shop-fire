@@ -6,25 +6,31 @@ import { addToDb,
 import Product from '../Product/Product';
 import './Shop.css'
 import Cart from '../Cart/Cart'
+import useProducts from '../../Hooks/useProducts';
 
 const Shop = () => {
 
     //loading product data from local directory
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
     //adding product to cart
     const [cart, setCart] = useState([]);
 
-    
+    //here from 28 to 45 line code we will use the same code to show products in the order review page.Now we will do this outside of this component
 
 
-    useEffect(() => {
+    /* useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
             .then(data => setProducts(data))
         
-    }, [])
+    }, []) */
+    //instead of the code above we use Custom hook
+    const [products, setProducts] = useProducts();
 
     //getting product from an external file or api ,we use useEffect
+    //here from 28 to 45 line code we will use the same code to show products in the order review page.Now we will do this outside of this component(line 28 above)
+
+
     useEffect(() => {
         const storedCart = getStoredCart();
         const savedCart = [];
@@ -42,7 +48,7 @@ const Shop = () => {
 
         setCart(savedCart); //this set cart updated the cart with the parameter savedcart which is derived from the local storage.Here setCart is a state action used in line 15 to update cart info.By using set cart here we cart derive the cart info even after a reload 'cause info is saved in local storage
 
-    },[products])//dependecy added products means whenever there is a changed the hook useEffect is going to run . Otherwise with no dependecy it runs only once. In that case this piece of code runs before there is any product is added in the local storage
+    },[products])//dependecy added products means whenever there is a change the products useEffect is going to run . Otherwise with no dependecy it runs only once. In that case this piece of code runs before there is any product is added in the local storage
     
     //here we are sending a function (an eventhandler) to the  child component.from that we are sending a parameter upto the parent component
 
