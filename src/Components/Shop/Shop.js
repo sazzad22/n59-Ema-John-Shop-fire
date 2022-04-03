@@ -7,6 +7,7 @@ import Product from '../Product/Product';
 import './Shop.css'
 import Cart from '../Cart/Cart'
 import useProducts from '../../Hooks/useProducts';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
 
@@ -73,7 +74,12 @@ const Shop = () => {
             </div> 
 
             <div className="cart-container">
-                <Cart cart={cart}></Cart>
+                {/* component er peter vetor koto elment add korle sheta props.children hishebe access kora jay ebong element ta show o kora jay.To do that one has to mention the {props.childdren} dinamically inside that element itself (inside the same page)  */}
+                <Cart cart={cart}>
+                <Link to='/order'>
+                    <button>Review Order</button></Link>
+                    
+                </Cart>
             </div>
 
         </div>
