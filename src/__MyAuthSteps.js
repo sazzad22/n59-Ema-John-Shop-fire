@@ -26,4 +26,6 @@
 5- cmd - firebase init - answer or choose from the options from the init part(one time for each project )
 6- website er steps gulo te last e firebase deploy er jonno command thakbe - but before that project ke build korte hobe - so run - npm run build(every time you want to deploy)
 7 - firebase deploy (every time you want to deploy)
+
+8- every time i update something there only two step - build and firebase deploy
 */
