@@ -4,7 +4,7 @@ import './Cart.css'
 const Cart = (props) => {
 
     const { cart } = props;
-    console.log(cart);
+    
 
 
     let total = 0;
@@ -16,7 +16,7 @@ const Cart = (props) => {
     }
     // console.log(cart);
     const tax = parseFloat((total * 0.1).toFixed(2));
-    console.log(tax);
+    
     
     const grandTotal = total + shipping + tax;
 
