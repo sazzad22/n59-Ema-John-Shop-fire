@@ -26,7 +26,19 @@ const Shop = () => {
         
     }, []) */
   //instead of the code above we use Custom hook
-  const [products, setProducts] = useProducts();
+  // const [products, setProducts] = useProducts();
+  //pagination
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(10);
+
+  //instead of using useProducts() we copy its code and paste it here cz we want to fetch with the page and size information
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [page, size]);
 
   //getting product from an external file or api ,we use useEffect
   //here from 28 to 45 line code we will use the same code to show products in the order review page.Now we will do this outside of this component(line 28 above)
@@ -53,6 +65,17 @@ const Shop = () => {
 
   //addtocart button e click korle product cart e add hobe. here cart holo ekta array. Normally btn click korle ai cart array te new product push kore dear kotha. Amra ta na kore spread operator use kore cart array ta ke update korbo. [...cart,product]
 
+  //pagination
+  useEffect(() => {
+    fetch("http://localhost:5000/productcount")
+      .then((res) => res.json())
+      .then((data) => {
+        const count = data.count;
+        const pages = Math.ceil(count / 10);
+        setPageCount(pages);
+      });
+  }, []);
+
   const handleAddToCart = (product) => {
     // cart.push(product);
     const newCart = [...cart, product];
@@ -62,14 +85,38 @@ const Shop = () => {
 
   return (
     <div className="shop-container">
-      <div className="products-container">
-        {products.map((product) => (
-          <Product
-            key={product._id}
-            product={product}
-            handleAddToCart={handleAddToCart}
-          ></Product>
-        ))}
+      <div>
+        <div className="products-container">
+          {products.map((product) => (
+            <Product
+              key={product._id}
+              product={product}
+              handleAddToCart={handleAddToCart}
+            ></Product>
+          ))}
+        </div>
+        <div className="pagination">
+          {[...Array(pageCount).keys()].map((number) => (
+            <button
+              className={page === number ? "selected" : ""}
+              onClick={() => setPage(number)}
+            >
+              {number + 1}
+            </button>
+          ))}
+          <select
+            name=""
+            id=""
+            onChange={(event) => setSize(event.target.value)}
+          >
+            <option value="5">5</option>
+            <option value="10" selected>
+              10
+            </option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
       </div>
 
       <div className="cart-container">

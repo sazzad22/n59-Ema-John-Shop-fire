@@ -14,3 +14,17 @@
 .cart-container{
     background-color: rgba(252, 215, 146, 0.842);
 }
+.pagination{
+    margin:0 50px 100px;
+
+}
+.pagination button{
+    margin-right: 4px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid orange;
+    
+}
+.pagination .selected{
+    background-color: orange;
+    color: white;
+}
